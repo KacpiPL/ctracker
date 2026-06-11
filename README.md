@@ -27,6 +27,16 @@ cd ctracker
 pip3 install -r requirements.txt
 ```
 
+> **`pip3` fails with `externally-managed-environment`?** That's [PEP 668](https://peps.python.org/pep-0668/) on newer Python (e.g. Homebrew). Use a virtual environment instead:
+>
+> ```bash
+> python3 -m venv .venv
+> source .venv/bin/activate
+> pip install -r requirements.txt
+> ```
+>
+> Keep it activated (or prefix the commands below with `.venv/bin/`) when you run or build the app.
+
 ### First run
 
 ```bash
