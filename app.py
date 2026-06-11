@@ -10,7 +10,12 @@ import logging
 import threading
 from api import get_usage, get_extra_usage, format_resets_in
 
-LOG_PATH = os.path.join(os.path.dirname(__file__), "error.log")
+# Write the log to a per-user, writable location — never inside the .app bundle.
+# A bundle in /Applications can be owned by another user (or root) and is then
+# read-only for us; writing the log inside it would crash the app at startup.
+LOG_DIR = os.path.expanduser("~/Library/Logs/ctracker")
+os.makedirs(LOG_DIR, exist_ok=True)
+LOG_PATH = os.path.join(LOG_DIR, "error.log")
 logging.basicConfig(filename=LOG_PATH, level=logging.ERROR,
                     format="%(asctime)s %(levelname)s %(message)s")
 
