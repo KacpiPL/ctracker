@@ -20,7 +20,10 @@ logging.basicConfig(filename=LOG_PATH, level=logging.ERROR,
                     format="%(asctime)s %(levelname)s %(message)s")
 
 
-PREFS_PATH = os.path.join(os.path.dirname(__file__), ".ctracker_prefs")
+# Prefs live in the user's home dir, not inside the .app bundle — the bundle
+# can be read-only in multi-user installs (same reason as the log above).
+PREFS_DIR = os.path.expanduser("~/Library/Application Support/ctracker")
+PREFS_PATH = os.path.join(PREFS_DIR, ".ctracker_prefs")
 
 CURRENCY_SYMBOLS = {
     "USD": "$", "EUR": "€", "GBP": "£", "PLN": "zł",
@@ -54,6 +57,7 @@ def _load_pref_show_cost():
 
 def _save_pref_show_cost(enabled):
     try:
+        os.makedirs(PREFS_DIR, exist_ok=True)
         with open(PREFS_PATH, "w") as f:
             f.write("1" if enabled else "0")
     except Exception:
