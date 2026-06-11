@@ -22,7 +22,7 @@ No API keys needed — reads your existing Chrome session cookies automatically.
 ## Install
 
 ```bash
-git clone https://github.com/kamilgpuk/ctracker.git
+git clone https://github.com/KacpiPL/ctracker.git
 cd ctracker
 pip3 install -r requirements.txt
 ```
